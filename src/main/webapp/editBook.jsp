@@ -91,7 +91,6 @@
         <label for="authorId">Author ID:</label>
         <input type="number" id="authorId" name="authorId" step="1" min="1" value="<%=book.getAuthor().getId()%>">
 
-        <label for="createdAt">Created:</label>
         <input type="hidden" id="createdAt" name="createdAt" value="<%=DateUtil.fromDateToWebString(book.getCreatedAt())%>">
 
         <input type="submit" value="UPDATE">
