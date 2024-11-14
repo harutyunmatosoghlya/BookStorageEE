@@ -1,10 +1,10 @@
-<%@ page import="java.util.List" %>
-<%@ page import="am.itspace.authorbookee.model.Author" %>
+<%@ page import="am.itspace.authorbookee.model.Book" %>
+<%@ page import="am.itspace.authorbookee.util.DateUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Book</title>
+    <title>Edit Book</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -70,30 +70,31 @@
     </style>
 </head>
 <body>
-<%List<Author> authors = (List<Author>) request.getAttribute("authors");%>
+<%Book book = (Book) request.getAttribute("book");%>
 <div>
-    <h1>Add Book</h1>
+    <h1>Edit Book</h1>
     <div class="links">
         <a href="/books">Books</a> |
         <a href="index.jsp">Main</a>
     </div>
-    <form action="/addBook" method="post">
+    <form action="/editBook" method="post">
+        <input type="hidden" name="id" value="<%=book.getId()%>">
         <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required>
+        <input type="text" id="title" name="title" value="<%=book.getTitle()%>">
 
         <label for="price">Price:</label>
-        <input type="number" id="price" name="price" step="0.01" min="1" required>
+        <input type="number" id="price" name="price" step="0.01" min="0.01" value="<%=book.getPrice()%>">
 
         <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity" min="0" required>
+        <input type="number" id="quantity" name="quantity" step="1" min="1" value="<%=book.getQty()%>">
 
-        <label for="authorId">Author:</label>
-        <select id="authorId" name="authorId">
-            <%for (Author author : authors) {%>
-            <option value="<%=author.getId()%>"><%=author.getName() + " " + author.getSurname()%></option>
-            <%}%>
-        </select>
-        <input type="submit" value="ADD">
+        <label for="authorId">Author ID:</label>
+        <input type="number" id="authorId" name="authorId" step="1" min="1" value="<%=book.getAuthor().getId()%>">
+
+        <label for="createdAt">Created:</label>
+        <input type="hidden" id="createdAt" name="createdAt" value="<%=DateUtil.fromDateToWebString(book.getCreatedAt())%>">
+
+        <input type="submit" value="UPDATE">
     </form>
 </div>
 </body>

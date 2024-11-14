@@ -88,6 +88,7 @@
 
         <label for="gender">Gender:</label>
         <select id="gender" name="gender">
+            <option value="" selected></option>
             <option value="MALE">MALE</option>
             <option value="FEMALE">FEMALE</option>
         </select>

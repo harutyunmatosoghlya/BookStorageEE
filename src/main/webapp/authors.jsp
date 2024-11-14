@@ -68,6 +68,45 @@
         td {
             font-size: 14px;
         }
+
+        .delete-link {
+            color: #e74c3c;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            background-color: #fceae8;
+            border: 1px solid #e74c3c;
+            text-transform: uppercase;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .delete-link:hover {
+            background-color: #e74c3c;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(231, 76, 60, 0.2);
+        }
+
+        .edit-link {
+            color: #f39c12;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            background-color: #fff6e5;
+            border: 1px solid #f39c12;
+            text-transform: uppercase;
+            font-size: 12px;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .edit-link:hover {
+            background-color: #f39c12;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(243, 156, 18, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -86,16 +125,25 @@
         <th>Phone</th>
         <th>Date of Birth</th>
         <th>Gender</th>
+        <th>action</th>
     </tr>
 
     <% for (Author author : authors) { %>
     <tr>
-        <td><%= author.getId() %></td>
-        <td><%= author.getName() %></td>
-        <td><%= author.getSurname() %></td>
-        <td><%= author.getPhone() %></td>
-        <td><%= DateUtil.fromDateToString(author.getDateOfBirthday()) %></td>
-        <td><%= author.getGender().name() %></td>
+        <td><%= author.getId() %>
+        </td>
+        <td><%= author.getName() %>
+        </td>
+        <td><%= author.getSurname() %>
+        </td>
+        <td><%= author.getPhone() %>
+        </td>
+        <td><%= DateUtil.fromDateToString(author.getDateOfBirthday()) %>
+        </td>
+        <td><%= author.getGender().name() %>
+        </td>
+        <td><a href="/deleteAuthor?id=<%= author.getId() %>" class="delete-link">DELETE</a> | <a
+                href="/editAuthor?id=<%= author.getId() %>" class="edit-link">EDIT</a></td>
     </tr>
     <% } %>
 </table>

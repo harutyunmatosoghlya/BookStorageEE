@@ -1,10 +1,10 @@
-<%@ page import="java.util.List" %>
 <%@ page import="am.itspace.authorbookee.model.Author" %>
+<%@ page import="am.itspace.authorbookee.model.Gender" %>
+<%@ page import="am.itspace.authorbookee.util.DateUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Add Book</title>
+    <title>Edit Author</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -70,30 +70,38 @@
     </style>
 </head>
 <body>
-<%List<Author> authors = (List<Author>) request.getAttribute("authors");%>
+<%Author author = (Author) request.getAttribute("author");%>
 <div>
-    <h1>Add Book</h1>
+    <h1>Edit Author</h1>
     <div class="links">
-        <a href="/books">Books</a> |
+        <a href="/authors">Authors</a> |
         <a href="index.jsp">Main</a>
     </div>
-    <form action="/addBook" method="post">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required>
+    <form action="/editAuthor" method="post">
+        <input type="hidden" name="id" value="<%=author.getId()%>">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="<%=author.getName()%>">
 
-        <label for="price">Price:</label>
-        <input type="number" id="price" name="price" step="0.01" min="1" required>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname" value="<%=author.getSurname()%>">
 
-        <label for="quantity">Quantity:</label>
-        <input type="number" id="quantity" name="quantity" min="0" required>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" value="<%=author.getPhone()%>">
 
-        <label for="authorId">Author:</label>
-        <select id="authorId" name="authorId">
-            <%for (Author author : authors) {%>
-            <option value="<%=author.getId()%>"><%=author.getName() + " " + author.getSurname()%></option>
+        <label for="dob">Date Of Birthday:</label>
+        <input type="date" id="dob" name="dob" value="<%=DateUtil.fromDateToWebString(author.getDateOfBirthday())%>">
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <%if (author.getGender() == Gender.MALE) {%>
+            <option value="MALE" selected>MALE</option>
+            <option value="FEMALE">FEMALE</option>
+            <%} else {%>
+            <option value="MALE">MALE</option>
+            <option value="FEMALE" selected>FEMALE</option>
             <%}%>
         </select>
-        <input type="submit" value="ADD">
+        <input type="submit" value="UPDATE">
     </form>
 </div>
 </body>

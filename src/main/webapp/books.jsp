@@ -68,6 +68,45 @@
         td {
             font-size: 14px;
         }
+
+        .delete-link {
+            color: #e74c3c;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            background-color: #fceae8;
+            border: 1px solid #e74c3c;
+            text-transform: uppercase;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .delete-link:hover {
+            background-color: #e74c3c;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(231, 76, 60, 0.2);
+        }
+
+        .edit-link {
+            color: #f39c12;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 4px;
+            background-color: #fff6e5;
+            border: 1px solid #f39c12;
+            text-transform: uppercase;
+            font-size: 12px;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .edit-link:hover {
+            background-color: #f39c12;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(243, 156, 18, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -85,6 +124,7 @@
         <th>Quantity</th>
         <th>Author Name</th>
         <th>Created at</th>
+        <th>action</th>
     </tr>
 
     <% for (Book book : books) { %>
@@ -101,6 +141,8 @@
         </td>
         <td><%= DateUtil.fromDateToString(book.getCreatedAt()) %>
         </td>
+        <td><a href="/deleteBook?id=<%= book.getId() %>" class="delete-link">DELETE</a> | <a
+                href="/editBook?id=<%= book.getId() %>" class="edit-link">EDIT</a></td>
     </tr>
     <% } %>
 </table>

@@ -153,4 +153,19 @@ public class BookService {
         }
         return result;
     }
+
+    public void update(Book book) {
+        String sql = "UPDATE book SET title = ?, price = ?, qty = ?, author_id = ?, created_at = ? WHERE id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, book.getTitle());
+            preparedStatement.setDouble(2, book.getPrice());
+            preparedStatement.setInt(3, book.getQty());
+            preparedStatement.setInt(4, book.getAuthor().getId());
+            preparedStatement.setDate(5, new java.sql.Date(book.getCreatedAt().getTime()));
+            preparedStatement.setInt(6, book.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

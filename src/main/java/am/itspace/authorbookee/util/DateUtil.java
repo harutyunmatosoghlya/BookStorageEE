@@ -14,6 +14,10 @@ public abstract class DateUtil {
         return SDF.parse(dateStr);
     }
 
+    public static String fromDateToWebString(Date date) {
+        return SDF_WEB_DATE.format(date);
+    }
+
     public static Date fromWebStringToDate(String dateStr) throws ParseException {
         return SDF_WEB_DATE.parse(dateStr);
     }
